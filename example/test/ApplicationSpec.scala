@@ -39,4 +39,10 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
 
   }
 
+  "FibController" should {
+    "return 8000" in {
+      contentAsString(route(app, FakeRequest(GET, "/fib")).get) mustBe "8000"
+    }
+  }
+
 }

@@ -13,4 +13,6 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0-RC1" % Test
 )
 
+libraryDependencies += "com.rabbitmq" % "amqp-client" % "3.6.1"
+
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

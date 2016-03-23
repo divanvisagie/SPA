@@ -14,5 +14,6 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "com.rabbitmq" % "amqp-client" % "3.6.1"
+libraryDependencies += "org.json4s" % "json4s-native_2.11" % "3.3.0"
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

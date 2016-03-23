@@ -6,15 +6,26 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.AMQP.BasicProperties;
 
+
+
+
 public class RPCServer {
 
-    private static final String RPC_QUEUE_NAME = "rpc_queue";
+    private String RPC_QUEUE_NAME = "rpc_queue";
+    private IRPCHandler rpcHandler;
 
-    private static int fib(int n) {
+    public RPCServer(String queueName, IRPCHandler handler) {
+        RPC_QUEUE_NAME = queueName;
+        rpcHandler = handler;
+    }
+
+
+    public static int fib(int n) {
         if (n ==0) return 0;
         if (n == 1) return 1;
         return fib(n-1) + fib(n-2);
     }
+
 
     public void listen() {
         Connection connection = null;
@@ -26,7 +37,7 @@ public class RPCServer {
             connection = factory.newConnection();
             channel = connection.createChannel();
 
-            channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
+            channel.queueDeclare(RPC_QUEUE_NAME, true, false, false, null);
 
             channel.basicQos(1);
 
@@ -48,10 +59,8 @@ public class RPCServer {
 
                 try {
                     String message = new String(delivery.getBody(),"UTF-8");
-                    int n = Integer.parseInt(message);
-
                     System.out.println(" [.] fib(" + message + ")");
-                    response = "" + fib(n);
+                    response = rpcHandler.handleMessage(message);
                 }
                 catch (Exception e){
                     System.out.println(" [.] " + e.toString());

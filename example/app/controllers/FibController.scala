@@ -5,16 +5,18 @@ package controllers
   */
 
 import javax.inject._
+import messages.{MathAnswer, Fibonacci}
 import play.api._
 import play.api.mvc._
-import services.ServiceClient
+import services.{DomainMessage, ServiceClient}
+
 
 @Singleton
 class FibController @Inject() (serviceClient: ServiceClient) extends Controller {
 
-  def fib = Action {
-    val ans = serviceClient.getFib(40)
-    Ok(ans)
+  def fib(number: Int) = Action {
+    val ans = serviceClient.call[MathAnswer](Fibonacci(number))
+    Ok(ans.answer.toString)
   }
 
 }

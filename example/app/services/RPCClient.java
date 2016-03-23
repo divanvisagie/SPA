@@ -15,7 +15,9 @@ public class RPCClient {
     private String replyQueueName;
     private QueueingConsumer consumer;
 
-    public RPCClient() throws Exception {
+    public RPCClient(String queueName) throws Exception {
+        requestQueueName = queueName;
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         connection = factory.newConnection();
@@ -53,26 +55,26 @@ public class RPCClient {
         connection.close();
     }
 
-    public static void main(String[] argv) {
-        RPCClient fibonacciRpc = null;
-        String response = null;
-        try {
-            fibonacciRpc = new RPCClient();
-
-            System.out.println(" [x] Requesting fib(30)");
-            response = fibonacciRpc.call("30");
-            System.out.println(" [.] Got '" + response + "'");
-        }
-        catch  (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (fibonacciRpc!= null) {
-                try {
-                    fibonacciRpc.close();
-                }
-                catch (Exception ignore) {}
-            }
-        }
-    }
+//    public static void main(String[] argv) {
+//        RPCClient fibonacciRpc = null;
+//        String response = null;
+//        try {
+//            fibonacciRpc = new RPCClient();
+//
+//            System.out.println(" [x] Requesting fib(30)");
+//            response = fibonacciRpc.call("30");
+//            System.out.println(" [.] Got '" + response + "'");
+//        }
+//        catch  (Exception e) {
+//            e.printStackTrace();
+//        }
+//        finally {
+//            if (fibonacciRpc!= null) {
+//                try {
+//                    fibonacciRpc.close();
+//                }
+//                catch (Exception ignore) {}
+//            }
+//        }
+//    }
 }

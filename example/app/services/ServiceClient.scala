@@ -1,14 +1,20 @@
 package services
 
-/**
-  * Created by divanvisagie on 2016/03/23.
-  */
+import org.json4s._
+import org.json4s.native.Serialization
+import org.json4s.native.Serialization.{read, write}
+
+
 class ServiceClient {
+  implicit val formats = Serialization.formats(NoTypeHints)
 
-  val rpcClient = new RPCClient()
+  val rpcClient = new RPCClient("fibonacci")
 
-  def getFib(number: Int) : String = {
-    rpcClient.call("30")
+  def call[T](x: DomainMessage)(implicit m: Manifest[T]): T = {
+    val queueName = x.getClass.getSimpleName.toLowerCase
+    val rpcClient = new RPCClient(queueName)
+    val ans = rpcClient.call(write(x))
+    read[T](ans)
   }
 
 }

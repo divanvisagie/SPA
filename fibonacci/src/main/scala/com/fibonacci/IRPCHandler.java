@@ -1,4 +1,4 @@
-package com.example;
+package com.fibonacci;
 
 public interface IRPCHandler
 {

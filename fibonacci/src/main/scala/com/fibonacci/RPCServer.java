@@ -1,4 +1,4 @@
-package com.example;
+package com.fibonacci;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;

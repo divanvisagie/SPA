@@ -5,10 +5,10 @@ package controllers
   */
 
 import javax.inject._
-import messages.{MathAnswer, Fibonacci}
-import play.api._
+
+import messages.{Fibonacci, MathAnswer}
 import play.api.mvc._
-import services.{DomainMessage, ServiceClient}
+import services.ServiceClient
 
 
 @Singleton

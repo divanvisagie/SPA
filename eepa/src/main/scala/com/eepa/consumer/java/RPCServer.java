@@ -1,4 +1,4 @@
-package com.fibonacci;
+package com.eepa.consumer.java;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
@@ -14,16 +14,15 @@ public class RPCServer {
     private String RPC_QUEUE_NAME = "rpc_queue";
     private IRPCHandler rpcHandler;
 
+    private boolean shouldRun = true;
+
     public RPCServer(String queueName, IRPCHandler handler) {
         RPC_QUEUE_NAME = queueName;
         rpcHandler = handler;
     }
 
-
-    public static int fib(int n) {
-        if (n ==0) return 0;
-        if (n == 1) return 1;
-        return fib(n-1) + fib(n-2);
+    public void stop() {
+        shouldRun = false;
     }
 
 
@@ -46,7 +45,7 @@ public class RPCServer {
 
             System.out.println(" [x] Awaiting RPC requests");
 
-            while (true) {
+            while (shouldRun) {
                 String response = null;
 
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery();

@@ -2,9 +2,6 @@ package com.fibonacci
 
 import scala.annotation.tailrec
 
-/**
-  * Created by divanvisagie on 2016/03/24.
-  */
 class RecursiveMath {
   def fibonacci(n :Int) : Int = {
     @tailrec

@@ -1,5 +1,5 @@
 import com.google.inject.AbstractModule
-import services.ServiceClient
+import services.FibonacciService
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -14,6 +14,6 @@ import services.ServiceClient
 class Module extends AbstractModule {
 
   override def configure() = {
-    bind(classOf[ServiceClient])
+    bind(classOf[FibonacciService])
   }
 }

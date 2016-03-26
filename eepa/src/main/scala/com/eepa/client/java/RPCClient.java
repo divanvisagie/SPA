@@ -1,4 +1,4 @@
-package services;
+package com.eepa.client.java;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;

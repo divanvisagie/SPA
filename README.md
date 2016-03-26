@@ -1,6 +1,9 @@
 # SPA
 Scala implementation of EEPA
 
+
+![](https://rawgithub.com/divanvisagie/scala-EEPA/master/diagram/EEPA.svg)
+
 ## Publish Local
 
 In `./eepa` run:

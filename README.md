@@ -1,4 +1,4 @@
-# SPA
+# scala-EEPA
 Scala implementation of EEPA
 
 
